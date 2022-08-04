@@ -3886,12 +3886,11 @@ function main() {
         const baseBranch = github.context.payload.ref;
         const pullsResponse = yield client.pulls.list(Object.assign(Object.assign({}, github.context.repo), { base: baseBranch, state: 'open' }));
         const prs = pullsResponse.data;
-        yield Promise.all(prs.map((pr) => {
-            client.pulls.updateBranch(Object.assign(Object.assign({}, github.context.repo), { pull_number: pr.number }));
-        }));
+        console.log(prs);
+        yield Promise.all(prs.map((pr) => (client.pulls.updateBranch(Object.assign(Object.assign({}, github.context.repo), { pull_number: pr.number })))));
     });
 }
-main();
+main().catch(console.error);
 
 
 /***/ }),
