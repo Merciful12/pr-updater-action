@@ -12,14 +12,15 @@ async function main() {
         state: 'open',
     })
     const prs = pullsResponse.data
+    console.log(prs)
     await Promise.all(
-        prs.map((pr) => {
+        prs.map((pr) => ({
             client.pulls.updateBranch({
                 ...github.context.repo,
                 pull_number: pr.number,
-            })
+            }))
         }),
     )
 }
 
-main()
+main().catch(console.error)
