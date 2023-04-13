@@ -3,7 +3,7 @@ import * as github from '@actions/github'
 
 const token = core.getInput('token')
 const client = new github.GitHub(token)
-
+log
 async function main() {
     const baseBranch = github.context.payload.ref
     const pullsResponse = await client.pulls.list({
